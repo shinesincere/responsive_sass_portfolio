@@ -1,0 +1,107 @@
+.menu-btn {
+  position: absolute;
+  z-index: 3;
+  top:35px;
+  right: 35px;
+  cursor: pointer;
+  @include easeOut;
+  .btn-line {
+    width: 28px;
+    height: 3px;
+    margin: 0 0 5px 0;
+    background: set-text-color($c1);
+    @include easeOut;
+  }
+  &.hide {
+    transform: rotate(180deg);
+    .btn-line {
+      &:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+      &:nth-child(2) {
+        opacity: 0;
+      }
+      &:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+      }
+    }
+  }
+}
+
+.menu {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  visibility: hidden;
+  &.show {
+    visibility: visible;
+  }
+  &-branding,  &-nav{
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
+    width: 50vw;
+    height: 100vh;
+    float: left;
+    overflow: hidden;
+  }
+  &-branding {
+    background: rgba($c1, $o1);
+    transform: translate3d(0, 100%, 0);
+    @include easeOut;
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+    .portrait {
+      width: 250px;
+      height: 320px;
+      background-image: $image-face;
+      background-position: center;
+      background-size: contain;
+      margin: auto;
+      border-radius: 50%;
+      border: 3px solid $c3;
+    }
+  }
+  &-nav {
+    background: rgba($c1, $o2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    transform: translate3d(0, -100%, 0);
+    @include easeOut;
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+  }
+  .nav-item {
+    transform: translate3d(600px, 0, 0);
+    @include easeOut;
+    &.show {
+      transform: translate3d(0, 0, 0);
+    }
+    &.current > a{
+      color: $c3;
+    }
+  }
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    padding: 0.8rem;
+    font-size: 28px;
+    font-weight: bold;
+    color: set-text-color($c1);
+    text-transform: uppercase;
+    @include easeOut;
+    &:hover {
+      color: $c3;
+    }
+  }
+}
+
+@for $i from 1 through 4 {
+  .nav-item:nth-child(#{$i}){
+    transition-delay: $i * $t1;
+  }
+}

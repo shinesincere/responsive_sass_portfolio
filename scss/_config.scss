@@ -1,0 +1,77 @@
+$f: 100%;
+$z: 0;
+$o1: 0.5;
+$o2: 0.9;
+$t1: 0.1s;
+$t2: 0.5s;
+$c1: #234;
+$c2: rgba(0, 0, 0, 0.8);
+$c3: gold;
+$show-image-home: true;
+$image-home: url(../img/background.jpg);
+$image-face: url(../img/portrait.jpg);
+
+@mixin mediaSm {
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+@mixin mediaMd {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mediaLg {
+  @media screen and (max-width: 1170px) {
+    @content;
+  }
+}
+@mixin mediaXl {
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
+}
+
+@mixin easeOut {
+  transition: all $t2 ease-out;
+}
+
+@mixin easeOut2($x) {
+  transition: all $x ease-out;
+}
+
+@mixin background {
+  @if ($show-image-home) {
+    &#bg-img {
+      background: $image-home;
+      background-size: cover;
+      background-attachment: fixed;
+      &:after {
+        content: '';
+        position: absolute;
+        z-index: -1;
+        top: $z;
+        left: $z;
+        height: $f;
+        width: $f;
+        background: rgba($c1, $o1);
+      }
+    }
+  }
+}
+
+@function set-text-color($color) {
+  @if (lightness($color) < 40) {
+    @return #fff;
+  } @else {
+    @return #000;
+  }
+}
+
+@function set-shadow-color($color) {
+  @if (lightness($color) > 80) {
+    @return #fff;
+  } @else {
+    @return #000;
+  }
+}
